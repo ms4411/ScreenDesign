@@ -1,11 +1,4 @@
 
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
 /* 전체 묶음 div */
 .container{
     background-color: rgba(0,0,0,0.4);
@@ -13,7 +6,6 @@ body{
     width: 70%;
     aspect-ratio: 16/9;
     padding: 5%;
-    color: white;
     display: flex;
     box-shadow: 0px 0px 30px #dce2f2;
 }
@@ -36,8 +28,10 @@ body{
 img{
     position: relative;
     left: -5%;
-    width: 100%;
-    object-fit: contain;
+}
+.img-box>p{
+    margin-top: 5%;
+    font-size:xx-large;
 }
 /* 입력 박스 정렬 및 꾸미기 */
 .input-box{
@@ -53,26 +47,30 @@ img{
     text-align: center;
     font-size: large;
 }
-.input-box button{
+.input-box button,input{
     width: 100%;
     aspect-ratio: 10/1;
 }
-.input-box input{
-    color: black;
-    outline: none;
+.input-box button{
+    margin: 1% 0;
 }
-.input-box input:focus{
-    box-shadow: 0px 0px 10px #dce2f2;
+.input-box input{
+    outline: none;
+    color: black;
+}
+.input-box input:focus,button:hover{
+    box-shadow: 0px 0px 10px #062173, 0px 0px 10px #dce2f2;
+}
+.link{
+    color: white;
+    text-align: center;
 }
 .waring-text{
     box-sizing: border-box;
     margin: 5% 0;
     padding: 1% 0;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
     background-color: rgba(255,255,255,0.5);
-}
-.waring-text::before{
-    content: "※ ";
-    font-family: none;
+    color: black;
 }
