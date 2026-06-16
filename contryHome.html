@@ -5,66 +5,79 @@
     <title>나라</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
+        
+        /* 버튼 기능 설명 태그 */
+        .list>*::after{
+            content: attr(tooltip);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 75%;
+            
+            border: #062173 solid;
+            padding: 1px 5px;
+            border-radius: 10000px;
+            background-color: #dce2f2;
+            color: #062173;
+            font-size: medium;
+            white-space: nowrap; /* 글자가 아래로 줄바꿈되지 않게 함 */
+        }
         #content{
             padding: 10px;
-            padding-top: 60px;
-            display: flex;
-            width: 100%;
+            width: 70%;
             height: 100%;
-            gap: 10px;
-        }
-        div:has(ul){
-            width: fit-content;
+            margin: 0 auto;
+            margin-top: 55px;
         }
         .list{
+            margin: 10px 0;
+            height: 10vh;
             box-sizing: border-box;
             display: flex;
-            flex-direction: column;
-            height: 100%;
-            width: fit-content;
             gap: 5px;
+            justify-content: space-around;
         }
         .list>*{
-            flex: 1;
-            height: auto;
             background: none;
             padding: 0;
             background-color: #062173;
             border-radius: 50%;
+            box-sizing: border-box;
         }
-        img{
-            height: 90px;
-            width: auto;            
+        .list>*:hover{
+            border: white solid;
         }
         #pv-btn{
             width: 100%;
-            height: 9%;
-            margin: 0.5% 0;
+            height: 10%;
         }
         #contry{
             width: 100%;
+            height: 70%;
         }
         .container{
-            height: 90%;
+            height: 100%;
             padding: 0;
         }
         .slide-box{
-            height: 80%;
-            aspect-ratio: 16/9;
+            height: 60%;
+            width: 60%;
+            margin: 15px 0;
+            border: white solid;
         }
     </style>
 </head>
-<body class="sort-center">
+<body>
     <iframe src="menu.html" class="menu"></iframe>
     <div id="content">
         <div class="list">
-            <button><img class="logo" src="/rsc/나라/몬드.png"></button>
-            <button><img class="logo" src="/rsc/나라/리월.png"></button>
-            <button><img class="logo" src="/rsc/나라/이나즈마.png"></button>
-            <button><img class="logo" src="/rsc/나라/수메르.png"></button>
-            <button><img class="logo" src="/rsc/나라/폰타인.png"></button>
-            <button><img class="logo" src="/rsc/나라/나타.png"></button>
-            <button><img class="logo" src="/rsc/나라/스네즈나야.png"></button>
+            <button tooltip="몬드" class="logo"><img src="/rsc/나라/몬드.png"></button>
+            <button tooltip="리월" class="logo"><img src="/rsc/나라/리월.png"></button>
+            <button tooltip="이나즈마" class="logo"><img src="/rsc/나라/이나즈마.png"></button>
+            <button tooltip="수메르" class="logo"><img src="/rsc/나라/수메르.png"></button>
+            <button tooltip="폰타인" class="logo"><img src="/rsc/나라/폰타인.png"></button>
+            <button tooltip="나타" class="logo"><img src="/rsc/나라/나타.png"></button>
+            <button tooltip="스네즈나야" class="logo"><img src="/rsc/나라/스네즈나야.png"></button>
         </div>
         <div id="contry">
             <div id="contry-content" class="container sort-center">

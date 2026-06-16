@@ -18,6 +18,7 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: multiply;
     transition: background-image 0.3s ease-in-out;
+    overflow: hidden;
 
     height: 100%;
 }
@@ -58,7 +59,11 @@ input{
 }
 button{
     padding: 5px;
+    color: #062173;
+    position: relative;
+
 }
+/* 경고문 */
 .waring-text::before{
     content: "※ ";
     font-family: none;
@@ -86,13 +91,13 @@ img{
 .container{
     background-color: rgba(0,0,0,0.4);
     box-sizing: border-box;
-    padding: 5%;
+    border: white solid 0.5px;
     box-shadow: 0px 0px 30px #dce2f2;
 }
 
 /* 스타일 지정 */
 .btn-style1{
-    background-color: #062173;
+    background-color: #0f35a6;
     color: white;
 }
 .btn-style2{

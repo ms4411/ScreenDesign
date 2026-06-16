@@ -35,4 +35,4 @@ setInterval(()=>{
         moveCnt=1;
     }
     moveCnt+=1;
-}, 1000)
+}, 2000)

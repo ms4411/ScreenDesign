@@ -5,6 +5,7 @@
 }
 .slide-track>*{
     object-fit: fill;
+    height: 100%;
 }
 .slide-track{
     position: absolute;
