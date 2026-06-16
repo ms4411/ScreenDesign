@@ -1,0 +1,21 @@
+
+.star{
+    background:radial-gradient(white 10%, #697fbf, rgba(0,0,0,0) 60% );
+    border-radius:100%;
+    position: absolute;
+    animation: twingkle 0.5s ease-in-out infinite;
+    animation-name: twingkle;
+    animation-duration: 1s;
+}
+
+@keyframes twingkle {
+    0%{
+        scale: 1;
+    }
+    50%{
+        scale: 2;
+    }
+    100%{
+        scale: 0.1;
+    }
+}

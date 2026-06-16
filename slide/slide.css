@@ -1,0 +1,15 @@
+.slide-box{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+.slide-track>*{
+    object-fit: fill;
+}
+.slide-track{
+    position: absolute;
+    display: flex;
+    transition: all 0.5s;
+    height: 100%;
+}
+
