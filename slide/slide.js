@@ -1,14 +1,13 @@
-moveCnt=1;
-const imgNum=document.querySelector(".slide-track").childElementCount;
-const trackWidth=document.querySelector(".slide-box").clientWidth*imgNum;
-const imgWidth=trackWidth/imgNum;
-console.log(imgWidth, trackWidth)
-
 //css 자동 적용
 let link=document.createElement('link');
 link.rel='stylesheet';
 link.href='/slide/slide.css'
 document.querySelector('head').appendChild(link);
+
+moveCnt=1;
+const imgNum=document.querySelector(".slide-track").childElementCount;
+const trackWidth=document.querySelector(".slide-box").clientWidth*imgNum;
+const imgWidth=trackWidth/imgNum;
 
 document.querySelector(".slide-track").style.width=`${trackWidth}px`
 for (const element of document.querySelectorAll(".slide-track>*")) {
@@ -19,9 +18,31 @@ function newSlide(){
     let cloneTrack=document.querySelector(".slide-track")
         .cloneNode(true);
     document.querySelector(".slide-box").appendChild(cloneTrack);
+    cloneTrack.style.transform=`translateX(${imgWidth*moveCnt*-1+trackWidth*2}px)`;
     return cloneTrack;
 }
 newSlide();
+
+function changeImages(Images){
+    for (const element of document.querySelectorAll(".slide-track")) {
+        element.remove()
+    }
+    let slideTrack=document.createElement("div")
+    console.log(slideTrack)
+    for (const contryImg of Images) {
+        let image=document.createElement("img")
+        image.src=contryImg
+        slideTrack.appendChild(image)
+    }
+    
+    slideTrack.classList.add("slide-track")
+    document.querySelector(".slide-box").appendChild(slideTrack)
+    newSlide()
+    moveCnt=1
+    for (const element of document.querySelectorAll(".slide-track>*")) {
+    element.style.width=`${imgWidth}px`
+    }
+}
 
 setInterval(()=>{
     let tracks=[...document.querySelectorAll(".slide-track")];
@@ -30,7 +51,7 @@ setInterval(()=>{
     }
     if(imgNum<moveCnt){
         tracks.shift().remove()
-        newSlide().style.transform=`translateX(${imgWidth*moveCnt*-1+trackWidth*2}px)`;
+        newSlide()
 
         moveCnt=1;
     }

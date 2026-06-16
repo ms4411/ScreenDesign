@@ -71,7 +71,7 @@
     <iframe src="menu.html" class="menu"></iframe>
     <div id="content">
         <div class="list">
-            <button tooltip="몬드" class="logo"><img src="/rsc/나라/몬드.png"></button>
+            <button onclick="changeContry('몬드')" tooltip="몬드" class="logo"><img src="/rsc/나라/몬드.png"></button>
             <button tooltip="리월" class="logo"><img src="/rsc/나라/리월.png"></button>
             <button tooltip="이나즈마" class="logo"><img src="/rsc/나라/이나즈마.png"></button>
             <button tooltip="수메르" class="logo"><img src="/rsc/나라/수메르.png"></button>
@@ -93,14 +93,44 @@
                     7가지 원소가 살아 숨 쉬는 판타지 세계 티바트.<br>
                     아주 오래 전, 사람들은 신령에 대한 신앙을 통해 원소의 힘을 부여받아 황야를 개척하고 나라를 건설했다.<br>
                     500년 전, 오래된 나라가 멸망 후 천지가 개벽하고….<br>
-
                     대륙을 휩쓸던 재난이 멈췄지만, 사람들이 고대하던 평화는 오지 않았다
                 </p>
             </div>
             <button type="button" id="pv-btn">pv보러가기</button>
         </div>
     </div>
+
+
     <script src="/js/header.js"></script>
     <script src="/slide/slide.js"></script>
+    <script>
+        const contryContent={
+            "몬드":"티바트 대륙 북동쪽에 위치한 자유의 도시. \n산과 드넓은 평원 사이로 민들레 향기를 가득 머금은 자유의 바람이 \n시드르 호수 위로 불며 호수 중앙의 섬에 위치한 몬드성에 \n바람 신 바르바토스의 축복과 은혜를 가져다준다.",
+            "리월":"",
+            "이나즈마":"",
+            "수메르":"",
+            "폰타인":"",
+            "나타":"",
+            "스네즈나야":""
+        }
+        const contryImgs={
+            "몬드":["몬드배경1.jpg","몬드배경2.jpg","몬드배경3.jpg","몬드배경4.jpg","몬드배경5.jpg","몬드배경6.jpg","몬드배경7.jpg","몬드배경8.jpg","몬드배경9.jpg","몬드배경10.jpg"],
+            "리월":[],
+            "이나즈마":[],
+            "수메르":[],
+            "폰타인":[],
+            "나타":[],
+            "스네즈나야":[]
+        }
+        function changeContry(contry){
+            document.querySelector("#contry-content>h1").innerText=contry
+            document.querySelector("#contry-content>p").innerText=contryContent[contry]
+            let imgs=[]
+            for (const i in contryImgs[contry]) {
+                imgs.push(`/rsc/나라/${contry}/${contryImgs[contry][i]}`)
+            }
+            changeImages(imgs)
+        }
+    </script>
 </body>
 </html>
