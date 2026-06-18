@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나라</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        #content{
+            padding: 10px;
+            width: 70%;
+            height: 90%;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        .list{
+            margin-bottom: 5px;
+            height: 15vh;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            overflow-x: scroll;
+        }
+        .list>*{
+            height: 80%;
+            background: none;
+            padding: 0;
+            background-color: #062173;
+            border-radius: 50%;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .list>*:hover{
+            border: white solid;
+        }
+        #charater{
+            height: 80%;
+            display: flex;
+        }
+        #charater>*{
+            flex: 1;
+            min-width: 0;
+        }
+        #box2>.list{
+            overflow: visible;
+            width: 80%;
+            justify-content: space-between;
+        }
+
+    </style>
+</head>
+<body>
+    <iframe src="menu.html" class="menu"></iframe>
+    <div id="content">
+        <div class="list scrollBar">
+        </div>
+
+        <div id="charater" class="container">
+            <div id="box1"><img></div> <!-- 시각자료 -->
+
+            <div id="box2" class="sort-center"> <!--우측 자료ㅛ-->
+                <h1></h1>
+                <p></p>
+                <div class="list">
+                    <button class="logo" tooltip="일반 공격"><img src="/rsc/logo/iceLogo.png"></button>
+                    <button class="logo" tooltip="낙하 공격"><img></button>
+                    <button class="logo" tooltip="스킬"><img></button>
+                    <button class="logo" tooltip="궁극기"><img></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/header.js"></script>
+    <script>
+        // 필요 이미지
+        // 1. ${name}Prp.png / 캐릭터 버튼 프로필
+        // 2. ${name}.png / 캐릭터 정보 좌측 사진
+        // 3. ${name}Sk@.png / 캐릭터 스킬 @번
+        let propil={}
+        let images={}
+        let skils={'벤티':{1:'/rsc/logo/iceLogo.png',2:'ss',3:'ss',4:'ss'}}
+        let contentCrt={}
+        function changeScreen(name){
+            const image=document.createElement("img")
+            image.src=images[name]
+            document.querySelector("#box1>img").remove()
+            document.querySelector("#box1").appendChild(image)
+
+            document.querySelector("#box2>h1").innerText=name
+            document.querySelector("#box2>p").innerText=contentCrt[name]
+            
+            document.querySelector("#box2>.list>button[tooltip='일반 공격']>img").src=skils[name][1]
+            document.querySelector("#box2>.list>button[tooltip=낙하 공격]>img").src=skils[name][2]
+            document.querySelector("#box2>.list>button[tooltip=스킬]>img").src=skils[name][3]
+            document.querySelector("#box2>.list>button[tooltip=궁극기]>img").src=skils[name][4]
+            
+        }
+        function newCharacter(name, contents){
+            let button=document.createElement("button")
+            let img=document.createElement("img")
+            img.src=`/rsc/캐릭터/${name}Prp.png`
+            button.appendChild(img)
+            button.setAttribute('tooltip', name)
+            button.classList.add("logo")
+            button.onclick=()=>{changeScreen(name)}
+            contentCrt[name]=contents
+            propil[name]=`/rsc/캐릭터/${name}Prp.png`
+            images[name]=`/rsc/캐릭터/${name}.png`
+            skils[name]=[`/rsc/캐릭터/${name}Sk1.png`,`/rsc/캐릭터/${name}Sk2.png`,`/rsc/캐릭터/${name}Sk3.png`,`/rsc/캐릭터/${name}Sk4.png`]
+            document.querySelector(".list").appendChild(button)
+        }
+
+        newCharacter('벤티', '술 주정뱅이다ㅏ')
+        newCharacter('종려', '건망증 할부지')
+    </script>
+</body>
+</html>

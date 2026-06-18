@@ -6,22 +6,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <style>
         
-        /* 버튼 기능 설명 태그 */
-        .list>*::after{
-            content: attr(tooltip);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 75%;
-            
-            border: #062173 solid;
-            padding: 1px 5px;
-            border-radius: 10000px;
-            background-color: #dce2f2;
-            color: #062173;
-            font-size: medium;
-            white-space: nowrap; /* 글자가 아래로 줄바꿈되지 않게 함 */
-        }
         #content{
             padding: 10px;
             width: 70%;
@@ -30,7 +14,7 @@
             margin-top: 55px;
         }
         .list{
-            margin: 10px 0;
+            margin-bottom: 10px;
             height: 10vh;
             box-sizing: border-box;
             display: flex;

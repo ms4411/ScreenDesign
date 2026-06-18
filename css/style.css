@@ -22,9 +22,6 @@ body{
 
     height: 100%;
 }
-body::-webkit-scrollbar {
-    display: none;
-}
 div{
     box-sizing: border-box;
 
@@ -70,6 +67,7 @@ button{
 }
 a{
     color: #0f35a6;
+    text-decoration: none;
 }
 img{
     width: 100%;
@@ -107,4 +105,32 @@ img{
 .hover-style:hover{
     background: radial-gradient( #697fbf, rgba(0,0,0,0) 70% );
 
+}
+
+/* 스크롤바 스타일 지정 */
+.scrollBar::-webkit-scrollbar {
+  /* 스크롤바의 너비 */
+    height: 10px;  
+}
+.scrollBar::-webkit-scrollbar-thumb {
+    /* 스크롤바의 색상 */
+    background: #dce2f2;
+    border-radius: 10px;
+}
+
+/* 버튼 기능 설명 태그 */
+*[tooltip]::after{
+    content: attr(tooltip);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 75%;
+    
+    border: #062173 solid;
+    padding: 1px 5px;
+    border-radius: 10000px;
+    background-color: #dce2f2;
+    color: #062173;
+    font-size: medium;
+    white-space: nowrap; /* 글자가 아래로 줄바꿈되지 않게 함 */
 }
