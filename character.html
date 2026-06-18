@@ -30,8 +30,17 @@
             box-sizing: border-box;
             position: relative;
         }
+        #list img{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -20px;
+        }
         .list>*:hover{
             border: white solid;
+        }
+        #list>*:hover{
+            background-image: radial-gradient(#dce2f2, rgba(0,0,0,0) 60%);
         }
         #charater{
             height: 80%;
@@ -41,10 +50,16 @@
             flex: 1;
             min-width: 0;
         }
+        #box2{
+            justify-content: space-around;
+        }
         #box2>.list{
             overflow: visible;
             width: 80%;
             justify-content: space-between;
+        }
+        #box1>img,video{
+            object-fit: cover;
         }
 
     </style>
@@ -52,7 +67,7 @@
 <body>
     <iframe src="menu.html" class="menu"></iframe>
     <div id="content">
-        <div class="list scrollBar">
+        <div id="list" class="list scrollBar">
         </div>
 
         <div id="charater" class="container">
@@ -62,38 +77,57 @@
                 <h1></h1>
                 <p></p>
                 <div class="list">
-                    <button class="logo" tooltip="일반 공격"><img src="/rsc/logo/iceLogo.png"></button>
-                    <button class="logo" tooltip="낙하 공격"><img></button>
+                    <button class="logo" tooltip="일반 공격"><img></button>
                     <button class="logo" tooltip="스킬"><img></button>
                     <button class="logo" tooltip="궁극기"><img></button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="/js/header.js"></script>
+    
     <script>
         // 필요 이미지
         // 1. ${name}Prp.png / 캐릭터 버튼 프로필
         // 2. ${name}.png / 캐릭터 정보 좌측 사진
         // 3. ${name}Sk@.png / 캐릭터 스킬 @번
+        //필요 영상
+        // 1. ${name}V@.mp4 / 캐릭터 동영상 @번
         let propil={}
         let images={}
-        let skils={'벤티':{1:'/rsc/logo/iceLogo.png',2:'ss',3:'ss',4:'ss'}}
+        let skils={'벤티':[]}
         let contentCrt={}
+        let selectSk=null
         function changeScreen(name){
             const image=document.createElement("img")
             image.src=images[name]
-            document.querySelector("#box1>img").remove()
+            document.querySelector("#box1>*").remove()
             document.querySelector("#box1").appendChild(image)
 
             document.querySelector("#box2>h1").innerText=name
             document.querySelector("#box2>p").innerText=contentCrt[name]
             
-            document.querySelector("#box2>.list>button[tooltip='일반 공격']>img").src=skils[name][1]
-            document.querySelector("#box2>.list>button[tooltip=낙하 공격]>img").src=skils[name][2]
-            document.querySelector("#box2>.list>button[tooltip=스킬]>img").src=skils[name][3]
-            document.querySelector("#box2>.list>button[tooltip=궁극기]>img").src=skils[name][4]
-            
+            let btnList=[]
+            btnList.push(document.querySelector("#box2>.list>button[tooltip='일반 공격']>img"))
+            btnList.push(document.querySelector("#box2>.list>button[tooltip='스킬']>img"))
+            btnList.push(document.querySelector("#box2>.list>button[tooltip='궁극기']>img"))
+            for (const i in btnList) {
+                btnList[i].src=skils[name][i]
+
+                btnList[i].addEventListener('click',()=>{
+                    selectSk=btnList[i];
+                    playVidio(`/rsc/캐릭터/${name}V${+i+1}.mp4`);
+                })
+                btnList[i].style.border="none"
+            }
+        }
+        function playVidio(vidio){
+            let box=document.querySelector("#box1")
+            box.replaceChildren()
+            let vdo=document.createElement("video")
+            vdo.src=vidio
+            vdo.autoplay=true
+            vdo.loop = true;
+            box.appendChild(vdo)
         }
         function newCharacter(name, contents){
             let button=document.createElement("button")
@@ -106,12 +140,24 @@
             contentCrt[name]=contents
             propil[name]=`/rsc/캐릭터/${name}Prp.png`
             images[name]=`/rsc/캐릭터/${name}.png`
-            skils[name]=[`/rsc/캐릭터/${name}Sk1.png`,`/rsc/캐릭터/${name}Sk2.png`,`/rsc/캐릭터/${name}Sk3.png`,`/rsc/캐릭터/${name}Sk4.png`]
-            document.querySelector(".list").appendChild(button)
+            skils[name]=[`/rsc/캐릭터/${name}Sk1.png`,`/rsc/캐릭터/${name}Sk2.png`,`/rsc/캐릭터/${name}Sk3.png`]
+            document.querySelector("#list").appendChild(button)
         }
 
-        newCharacter('벤티', '술 주정뱅이다ㅏ')
-        newCharacter('종려', '건망증 할부지')
+        newCharacter('벤티', '정체가 불분명한 음유시인. \n가끔 아주 오래전의 노래를 부르고 가끔은 누구도 들어보지 못한 새로운 \n노래를 부른다.\n「바람」 원소의 힘을 끌어낼 때 원소의 모습이 깃털처럼 보여진다. \n이는 그가 하늘하늘거리는 물건을 마음에 들어 하기 때문이다.\n\ntmi : 바람의 신이지만 정체를 숨기고 다닌다. 술을 굉장히 좋아한다.')
+        newCharacter('종려', '「왕생당」의 초대를 받고 온 신비로운 객경.\n 잘생긴 외모에 고상한 행동거지, 범인을 뛰어넘는 학식을 가지고 있다.\n정체는 알 수 없지만 예의와 규칙을 잘 알고 있고 \n「왕생당」에서 온갖 의식을 거행한다.\n\n tmi : "아쉽게도 까먹었어"를 내뱉은 장본인.')
+        newCharacter('다이루크',' 다이루크는 몬드성 최고의 부자로서 \n품위 있는 태도를 지닌 완벽한 귀공자의 이미지를 보인다.\n그러나 그의 진짜 모습은 신념을 확고히 지키는 전사이다. \n그는 「수단과 방법을 가리지 않고 몬드를 수호한다」는 의지로 불탄다. \n그는 무서운 공세로 모든 적을 인정사정 없이 처리한다.')
+        newCharacter('데히야','수메르 사막을 누비는 느슨한 용병 단체 「도금 여단」의 단원. 용감하고 강하여 용병 사이에서 명성이 자자하다.')
+        newCharacter('마비카','나타의 불의 신이자 이 땅에서 모두에게 존경받는 지도자. 최고의 힘과 그 힘에 어울리는 기개를 갖추고 있다. 기억과 사랑은 심연에 맞서는 긴 여정에서 그녀를 나아가게 하는 원동력이다. 그녀는 승리로 향하는 길은 수많은 영웅들이 함께 만든 것이고, 자신은 단지 그들의 대행자라고 생각한다. 마비카는 지금까지도 자신의 신념을 지키며 나타를 새로운 미래로 이끌고 있다')
+        newCharacter('호두','호두——「왕생당」의 77대 당주. 리월의 장례를 주관하는, 중요한 인물이다. 최선을 다해 사람들의 장례를 치러주고 세상의 음양 간의 균형을 지킨다. 이 외에도 신기한 시인으로서 수많은 「걸작」이 리월 사람들에 의해 전해지고 있다.')
+        newCharacter('아를레키노','우인단 서열 4위 「하인」. 벽난로의 집 아이들이 경외해 마지않는 「아버지」다.')
+        newCharacter('클레','페보니우스 기사단의 불꽃 기사! 영원히 섬광과 폭발과 함께 나타난다!—그리고 진 단장의 엄격한 눈빛을 보고 묵묵히 사라지곤 한다.비록 새로운 폭약의 제조법은 감금 처벌을 받는 동안 생각해낸 것이지만...클레는 밖에서 노는 게 더 좋다고 생각한다.')
+        newCharacter('요이미야','재능이 넘치는 폭죽 장인. 「나가노하라 폭죽가게」의 현 점장이자 「여름 축제의 여왕」. 불꽃처럼 열정적인 소녀로 사그라들지 않는 동심과 장인 정신은 그녀에게 신기한 불꽃 반응을 일으켰다.')
+        newCharacter('리니','정교한 트릭과 유려한 말솜씨로 관객들의 마음을 사로잡는 폰타인의 유명한 천재 마술사. 훌륭한 언변과 뛰어난 연기력, 그리고 고양이처럼 종잡을 수 없는 마음을 지녔다.')
+        newCharacter()
+        newCharacter()
+        newCharacter()
+        changeScreen('벤티')
     </script>
 </body>
 </html>
