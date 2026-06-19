@@ -14,6 +14,9 @@
             position: relative;
             overflow: hidden;
         }
+        #baner{
+            position: relative;
+        }
         /* 결과 화면 */
         #result{
             padding: 20px;
@@ -25,7 +28,6 @@
         }
         /* 메인 5성 캐릭터 위치 및 스타일 지정 */
         #img1{
-            position: relative;
             height: 100%;
             width: auto;
         }
@@ -34,7 +36,7 @@
             position: absolute;
             text-align: left;
             top: 40%;
-            left: -100px;
+            left: 50px;
         }
         #img1>div>h1{
             text-align: left;
@@ -84,6 +86,7 @@
             height: 100%;
             padding: 50px 0;
             flex: 1;
+            opacity: 0;
         }
         #character-list img{
             object-fit: cover;
@@ -95,6 +98,15 @@
         .waring-text{
             margin: 0;
         }
+        @keyframes fade{
+            0%{
+                transform: translateX(20px);
+            }
+            100%{
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body class="sort-center">
@@ -103,30 +115,30 @@
     <div id="baner" class="sort-center container">
         <div id="img1" data-name="아를레키노">
             <div>
-                <h1>아를레키노</h1>
+                <h1></h1>
                 <button id="gacha-btn">뽑기</button>
             </div>
-            <img src="/rsc/캐릭터/아를레키노.png">
+            <img>
         </div>
         <div id="img2" class="sort-center">
-            <img src="/rsc/캐릭터/향릉.png">
-            <img src="/rsc/캐릭터/프레미네.png">
-            <img src="/rsc/캐릭터/리넷.png">
+            <img>
+            <img>
+            <img>
         </div>
     </div>
     <!-- 결과 화면 -->
     <div id="result" class="sort-center container" style="display: none;">
         <div id="character-list">
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
-            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center" style="--i: 0;"><img><p></p></div>
+            <div class="sort-center" style="--i: 1;"><img><p></p></div>
+            <div class="sort-center" style="--i: 2;"><img><p></p></div>
+            <div class="sort-center" style="--i: 3;"><img><p></p></div>
+            <div class="sort-center" style="--i: 4;"><img><p></p></div>
+            <div class="sort-center" style="--i: 5;"><img><p></p></div>
+            <div class="sort-center" style="--i: 6;"><img><p></p></div>
+            <div class="sort-center" style="--i: 7;"><img><p></p></div>
+            <div class="sort-center" style="--i: 8;"><img><p></p></div>
+            <div class="sort-center" style="--i: 9;"><img><p></p></div>
         </div>
         <button onclick="changeScreen()">돌아가기</button>
     </div>
@@ -149,6 +161,7 @@
         function showC(name, n){
             document.querySelectorAll("#character-list>div>img")[n].src=`/rsc/캐릭터/${name}.png`
             document.querySelectorAll("#character-list>div>p")[n].textContent=name
+            document.querySelectorAll("#character-list>div")[n].style.animation="fade 1s calc(var(--i) * 0.1s) forwards"
             if (C3.includes(name)){
                 document.querySelectorAll("#character-list>div>img")[n].style.objectFit='contain'
             }
@@ -162,7 +175,13 @@
         const C4=['베넷','신염','가명','향릉','토마','슈브르즈','연비','엠버','행추','달리아','캔디스','바바라','리넷','사유','설탕','헤이조','남연','파루잔','시노부','레이저','북두','도리','얀사','리사','피슬','사라','세토스','올로룬','키라라','카베','요요','콜레이','레일라','중운','프레미네','로자리아','미카','샤를로트','노엘','운근','카치나','응광','고로','디오나']
         const C5=['다이루크','데히야','모나','진','미즈키','각청','타이나리','치치']
         const up5=document.querySelector('#img1').dataset.name
-        const up4s=['향릉','프레미네','리넷']
+        const up4s=['향릉','프레미네','헤이조']
+        document.querySelector("#img1>div>h1").textContent=up5
+        document.querySelector("#img1>img").src=`/rsc/캐릭터/${up5}.png`
+        for (const idx in document.querySelectorAll("#img2>img")) {
+            document.querySelectorAll("#img2>img")[idx].src=`/rsc/캐릭터/${up4s[idx]}.png`
+        }
+        console.log(`/rsc/캐릭터${up5}.png`)
         //스택 저장
         let cnt5=0
         let cnt4=0
