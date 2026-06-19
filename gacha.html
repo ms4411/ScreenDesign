@@ -16,6 +16,7 @@
         }
         /* 결과 화면 */
         #result{
+            padding: 20px;
             flex-direction: column;
             justify-content: space-between;
         }
@@ -39,11 +40,9 @@
             text-align: left;
             font-size: 100px;
         }
-        #img1>div>p{
-            text-align: left;
-        }
-        #img1>div>button{
+        #gacha-btn{
             width: 100%;
+            font-size: x-large;
         }
         /* 4성 캐릭터 위치 및 스타일 지정 */
         #img2{
@@ -67,23 +66,31 @@
             margin-right: 200px;
             transform: scale(1.6);
         }
+
+        
         /* 결과 화면 스타일 지정 */
         /* 결과 리스트 스타일 지정 */
         #character-list{
             height: 100%;
             width: 100%;
-            background-color: red;
             gap: 10px;
-            padding: 10px;
+            padding: 10px 0;
             display: flex;
         }
         #character-list>div{
-            background-color: blue;
+            background-image: url(/rsc/gacha.png);
+            background-size: cover;
+            overflow: hidden;
             height: 100%;
+            padding: 50px 0;
             flex: 1;
+        }
+        #character-list img{
+            object-fit: cover;
         }
         #result>button{
             width: 100%;
+            aspect-ratio: 15/1;
         }
         .waring-text{
             margin: 0;
@@ -94,11 +101,10 @@
     <iframe class="menu" src="/menu.html"></iframe>
     <!-- 배너 화면 -->
     <div id="baner" class="sort-center container">
-        <div id="img1" name="아를레키노">
+        <div id="img1" data-name="아를레키노">
             <div>
                 <h1>아를레키노</h1>
-                <p>난롯가의 잿별 그림자</p>
-                <button onclick="changeScreen()">뽑기</button>
+                <button id="gacha-btn">뽑기</button>
             </div>
             <img src="/rsc/캐릭터/아를레키노.png">
         </div>
@@ -111,22 +117,23 @@
     <!-- 결과 화면 -->
     <div id="result" class="sort-center container" style="display: none;">
         <div id="character-list">
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
-            <div><img></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
+            <div class="sort-center"><img><p></p></div>
         </div>
         <button onclick="changeScreen()">돌아가기</button>
     </div>
-    <p class="waring-text">이 사이트는 매일 기원이 달라지며 상시 뽑기는 지원하지 않습니다</p>
+    <p class="waring-text">이 사이트는 매일 픽업 캐릭터가 달라지며, 상시 뽑기는 지원하지 않습니다</p>
 
     <script>
+
         // 결과 화면과 배너 화면 서로 변경 용도
         function changeScreen(){
             let screen1=document.querySelector("#baner")
@@ -139,6 +146,93 @@
                 document.querySelector("#result").style.display=''
             }
         }
+        function showC(name, n){
+            document.querySelectorAll("#character-list>div>img")[n].src=`/rsc/캐릭터/${name}.png`
+            document.querySelectorAll("#character-list>div>p")[n].textContent=name
+            if (C3.includes(name)){
+                document.querySelectorAll("#character-list>div>img")[n].style.objectFit='contain'
+            }
+            else{
+                document.querySelectorAll("#character-list>div>img")[n].style.objectFit=''
+            }
+        }
+
+        //뽑기 리스트
+        const C3=['비천어검','차가운 칼날','드래곤 블러드 소드','흑술창','드래곤 슬레이어 영웅담','탄궁','까마귀깃 활','여명신검','훌륭한 대화수단','강철의 그림자','비취 오브','마도 서론','신궁의 서약']
+        const C4=['베넷','신염','가명','향릉','토마','슈브르즈','연비','엠버','행추','달리아','캔디스','바바라','리넷','사유','설탕','헤이조','남연','파루잔','시노부','레이저','북두','도리','얀사','리사','피슬','사라','세토스','올로룬','키라라','카베','요요','콜레이','레일라','중운','프레미네','로자리아','미카','샤를로트','노엘','운근','카치나','응광','고로','디오나']
+        const C5=['다이루크','데히야','모나','진','미즈키','각청','타이나리','치치']
+        const up5=document.querySelector('#img1').dataset.name
+        const up4s=['향릉','프레미네','리넷']
+        //스택 저장
+        let cnt5=0
+        let cnt4=0
+        let cntStar=0
+        let yes5=false
+
+        function gacha10(){
+            let results=[]
+            for(let i=0;i<10;i++){
+                c=Math.random()
+                //소프트 천장 확률 보정
+                softCnt=(cnt5-73)*0.06
+                if (softCnt<0)
+                    softCnt=0
+                if (cntStar<0)
+                    cntStar=0
+                cnt5+=1
+                cnt4+=1
+                console.log(yes5)
+                console.log(cnt4)
+                console.log(cnt5)
+                console.log(cntStar)
+                //5성 처리
+                if(c<=0.006+softCnt){
+                    if(yes5){
+                        results.push(up5)
+                        yes5=false
+                    }
+                    else if(cntStar>=3){
+                        results.push(up5)
+                        cntStar=1
+                        yes5=false
+                    }
+                    else if(Math.random()<=0.5 || cnt5>=90){ //픽업 처리
+                        cntStar-=1
+                        results.push(up5)
+                        yes5=false
+                    }
+                    else{ //상시 처리
+                        cntStar+=1
+                        yes5=true
+                        results.push(C5[Math.floor(Math.random()*C5.length)])
+                    }
+                    cnt4=0
+                    cnt5=0
+                }
+                else if(c<=0.051 || cnt4>=10){
+                    cnt4=0
+                    results.push(C4[Math.floor(Math.random()*C4.length)])
+                }
+                else{
+                    results.push(C3[Math.floor(Math.random()*C3.length)])
+                }
+
+            }
+            for (let idx in results){
+                let temp=results[idx]
+                if (C5.includes(temp)){
+                    results.splice(idx,1)
+                    results.unshift(temp)
+                }
+            }
+            for (let idx in results) {
+                showC(results[idx],idx)
+            }
+        }
+        document.querySelector("#gacha-btn").addEventListener("click",()=>{
+            changeScreen()
+            gacha10()
+        })
     </script>
 </body>
 </html>
