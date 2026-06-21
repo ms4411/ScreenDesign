@@ -14,17 +14,18 @@
             position: relative;
             overflow: hidden;
         }
+        /* 배너 화면 */
         #baner{
             position: relative;
+        }
+        #baner>*{
+            height: 100%;
         }
         /* 결과 화면 */
         #result{
             padding: 20px;
             flex-direction: column;
             justify-content: space-between;
-        }
-        #baner>*{
-            height: 100%;
         }
         /* 메인 5성 캐릭터 위치 및 스타일 지정 */
         #img1{
@@ -38,10 +39,12 @@
             top: 40%;
             left: 50px;
         }
+        /* 캐릭터 이름 스타일 지정 */
         #img1>div>h1{
             text-align: left;
             font-size: 100px;
         }
+        /* 뽑기 버튼 */
         #gacha-btn{
             width: 100%;
             font-size: x-large;
@@ -53,13 +56,14 @@
             right: -50px;
             
         }
+        /* 4성 캐릭터 이미지 스타일 지정 */
         #img2>img{
-            object-fit: contain;
+            object-fit: contain; /*넓이에 맞추되 이미지 전체가 보이도록 지정*/
             height: 250px;
             width: auto;
             margin: -40px 0;
         }
-        /* 사진에 따른 위치 변경 */
+        /* 사진에 따른 위치 및 크기 변경 */
         #img2>img:nth-child(2){
             margin-right: -100px;
             transform: scale(1.3);
@@ -79,6 +83,7 @@
             padding: 10px 0;
             display: flex;
         }
+        /* 각 결과 스타일 지정 */
         #character-list>div{
             background-image: url(/rsc/gacha.png);
             background-size: cover;
@@ -86,18 +91,20 @@
             height: 100%;
             padding: 50px 0;
             flex: 1;
-            opacity: 0;
+            opacity: 0; /*투명화*/
         }
         #character-list img{
             object-fit: cover;
         }
         #result>button{
+            /* 넓이 지정 */
             width: 100%;
             aspect-ratio: 15/1;
         }
         .waring-text{
             margin: 0;
         }
+        /* 결과 자연스럽게 나타나는 애니메이션 */
         @keyframes fade{
             0%{
                 transform: translateX(20px);
@@ -149,19 +156,24 @@
         // 결과 화면과 배너 화면 서로 변경 용도
         function changeScreen(){
             let screen1=document.querySelector("#baner")
+            //배너 화면 보이기
             if (screen1.style.display==='none'){
                 screen1.style.display=''
                 document.querySelector("#result").style.display='none'
             }
+            //결과 화면 보이기
             else{
                 screen1.style.display='none'
                 document.querySelector("#result").style.display=''
             }
         }
+        // n번째 결과에 name 캐릭터 보이기
         function showC(name, n){
+            // 내용 변경
             document.querySelectorAll("#character-list>div>img")[n].src=`/rsc/캐릭터/${name}.png`
             document.querySelectorAll("#character-list>div>p")[n].textContent=name
             document.querySelectorAll("#character-list>div")[n].style.animation="fade 1s calc(var(--i) * 0.1s) forwards"
+            // 3성인 경우 css 변경
             if (C3.includes(name)){
                 document.querySelectorAll("#character-list>div>img")[n].style.objectFit='contain'
             }
@@ -176,12 +188,12 @@
         const C5=['다이루크','데히야','모나','진','미즈키','각청','타이나리','치치']
         const up5=document.querySelector('#img1').dataset.name
         const up4s=['향릉','프레미네','헤이조']
+        // 배너의 5성과 4성 내용 변경
         document.querySelector("#img1>div>h1").textContent=up5
         document.querySelector("#img1>img").src=`/rsc/캐릭터/${up5}.png`
         for (const idx in document.querySelectorAll("#img2>img")) {
             document.querySelectorAll("#img2>img")[idx].src=`/rsc/캐릭터/${up4s[idx]}.png`
         }
-        console.log(`/rsc/캐릭터${up5}.png`)
         //스택 저장
         let cnt5=0
         let cnt4=0
@@ -190,6 +202,7 @@
 
         function gacha10(){
             let results=[]
+            // 10회 돌려서 results에 결과 넣어두기
             for(let i=0;i<10;i++){
                 c=Math.random()
                 //소프트 천장 확률 보정
@@ -198,24 +211,21 @@
                     softCnt=0
                 if (cntStar<0)
                     cntStar=0
+                // 스택 올리기
                 cnt5+=1
                 cnt4+=1
-                console.log(yes5)
-                console.log(cnt4)
-                console.log(cnt5)
-                console.log(cntStar)
                 //5성 처리
                 if(c<=0.006+softCnt){
-                    if(yes5){
+                    if(yes5){ //확천인경우
                         results.push(up5)
                         yes5=false
                     }
-                    else if(cntStar>=3){
+                    else if(cntStar>=3){ //확천은 아니나 별빛포착인 경우
                         results.push(up5)
                         cntStar=1
                         yes5=false
                     }
-                    else if(Math.random()<=0.5 || cnt5>=90){ //픽업 처리
+                    else if(Math.random()<=0.5 || cnt5>=90){ //반천 처리
                         cntStar-=1
                         results.push(up5)
                         yes5=false
@@ -225,32 +235,51 @@
                         yes5=true
                         results.push(C5[Math.floor(Math.random()*C5.length)])
                     }
+                    //5성 뜬 후 스택 초기화
                     cnt4=0
                     cnt5=0
                 }
+                //4성 처리
                 else if(c<=0.051 || cnt4>=10){
                     cnt4=0
-                    results.push(C4[Math.floor(Math.random()*C4.length)])
+                    if(Math.random()<=0.5){ //4성 픽업 처리
+                        results.push(up4s[Math.floor(Math.random()*up4s.length)])
+                    }
+                    else{
+                        results.push(C4[Math.floor(Math.random()*C4.length)])
+                    }
                 }
+                //3성 처리
                 else{
                     results.push(C3[Math.floor(Math.random()*C3.length)])
                 }
 
             }
+            //4성 정렬 처리
             for (let idx in results){
                 let temp=results[idx]
-                if (C5.includes(temp)){
+                if (C4.includes(temp)){
                     results.splice(idx,1)
                     results.unshift(temp)
                 }
             }
+            // 5성 정렬 처리
+            for (let idx in results){
+                let temp=results[idx]
+                if (C5.includes(temp) || up5===temp){
+                    results.splice(idx,1)
+                    results.unshift(temp)
+                }
+            }
+            //캐릭터 결과 보이기
             for (let idx in results) {
                 showC(results[idx],idx)
             }
         }
+        // 뽑기 버튼 이벤트 추가
         document.querySelector("#gacha-btn").addEventListener("click",()=>{
-            changeScreen()
-            gacha10()
+            changeScreen() //화면 전화
+            gacha10() //뽑기 실행
         })
     </script>
 </body>

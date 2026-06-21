@@ -9,13 +9,15 @@ document.querySelector('head').appendChild(starLink);
 
 //별 자동 생성
 setInterval(()=>{
-    if(starList.length>10){
+    // 별 개수 30개 넘어갈 시 하나 삭제
+    if(starList.length>30){
         let star=starList.shift();
         star.remove();
     }
+    // 새로운 별 생성
     starList.push(createStar())
-}, Math.random()*700+300)
-
+}, Math.random()*700) //랜덤하게 생성
+//starBox 선언 및 css지정
 let starBox=document.querySelector('.star-box');
 starBox.style.position='relative'
 
@@ -28,8 +30,9 @@ function createStar(){
     //위치 지정
     star.style.top=`${Math.random()*90}%`
     star.style.left=`${Math.random()*90+5}%`
-
+    //클래스 추가
     star.classList.add('star');
+    //화면에 추가
     starBox.appendChild(star);
     return star
 }

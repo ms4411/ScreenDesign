@@ -7,71 +7,82 @@
     <style>
         
         #content{
-            padding: 10px;
+            /* 넓이 지정 */
             width: 70%;
             height: 100%;
+            /* 여백 지정 */
+            padding: 10px;
             margin: 0 auto;
             margin-top: 55px;
         }
         .list{
-            margin-bottom: 10px;
             height: 10vh;
-            box-sizing: border-box;
+            /* 여백 지정 */
+            margin-bottom: 10px;
             display: flex;
-            gap: 5px;
+            /* 자식 요소 정렬 지정 */
             justify-content: space-around;
+            gap: 5px;
         }
         .list>*{
-            background: none;
-            padding: 0;
             background-color: #062173;
-            border-radius: 50%;
+            border-radius: 50%; /*버튼 원현으로 지정*/
             box-sizing: border-box;
         }
+        /* 호버 스타일 */
         .list>*:hover{
-            border: white solid;
+            outline: white solid;
         }
         #pv-btn{
+            /* 넓이 지정 */
             width: 100%;
             height: 10%;
         }
         #contry{
+            /* 넓이 지정 */
             width: 100%;
             height: 70%;
         }
         .container{
+            /* 넓이 지정 */
             height: 100%;
-            padding: 0;
         }
         .slide-box{
+            /* 넓이 지정 */
             height: 60%;
             width: 60%;
+            /*여백 지정*/
             margin: 15px 0;
-            border: white solid;
+            border: white solid; /*테두리 흰색 지정*/
         }
         #contry-content{
             position: relative;
         }
         #stc1, #stc2{
             position: absolute;
-            height: auto;
+            height: auto; /*1/1 지정을 위해 auto로 풀기*/
         }
         #stc1{
+            /*위치 지정*/
             bottom: 100px;
             left: 100px;
-            width: 200px;
+            width: 200px;/*넓이 지정*/
         }
         #stc2{
+            /*위치 지정*/
             bottom: 110px;
             right: 150px;
-            width: 150px;
+            width: 150px;/*넓이 지정*/
         }
 
     </style>
 </head>
 <body>
+    <!-- 메뉴바 생성 -->
     <iframe src="menu.html" class="menu"></iframe>
+    <!-- 내부 내용 -->
     <div id="content">
+        <!-- 나라 버튼 리스트 -->
         <div class="list">
             <button onclick="changeContry('티바트')" tooltip="티바트" class="logo"><img src="/rsc/나라/티바트.png"></button>
             <button onclick="changeContry('몬드')" tooltip="몬드" class="logo"><img src="/rsc/나라/몬드.png"></button>
@@ -82,18 +93,24 @@
             <button onclick="changeContry('나타')" tooltip="나타" class="logo"><img src="/rsc/나라/나타.png"></button>
             <button onclick="changeContry('스네즈나야')" tooltip="스네즈나야" class="logo"><img src="/rsc/나라/스네즈나야.png"></button>
         </div>
+        <!-- 나라 정보 -->
         <div id="contry">
+            <!-- 나라 내용 -->
             <div id="contry-content" class="container sort-center">
                 <h1>티바트</h1>
+                <!-- 슬라이드 박스 -->
                 <div class="slide-box">
                     <div class="slide-track">
                         <img>
                     </div>
                 </div>
+                <!-- 내용 -->
                 <p style="text-align: center;"></p>
+                <!-- 스티커 2개 -->
                 <img id="stc1" class="logo">
                 <img id="stc2" class="logo">
             </div>
+            <!-- pv버튼 -->
             <button type="button" id="pv-btn">pv보러가기</button>
         </div>
     </div>
@@ -101,6 +118,7 @@
 
     <script src="/slide/slide.js"></script>
     <script>
+        //각 나라 정보
         const contryContent={
             "티바트":"7가지 원소와 7가지 나라, 일곱 신이 있는 세계 티바트.\n아주 오래 전, 사람들은 신령에 대한 신앙을 통해 원소의 힘을 부여받아 황야를 개척하고 나라를 건설했다.\n500년 전, 오래된 나라가 멸망 후 천지가 개벽하고….\n대륙을 휩쓸던 재난이 멈췄지만, 사람들이 고대하던 평화는 오지 않았다",
             "몬드":"티바트 대륙 북동쪽에 위치한 자유의 도시. \n산과 드넓은 평원 사이로 민들레 향기를 가득 머금은 자유의 바람이 \n시드르 호수 위로 불며 호수 중앙의 섬에 위치한 몬드성에 바람 신 바르바토스의 축복과 은혜를 가져다준다.",
@@ -111,6 +129,7 @@
             "나타":"티바트 대륙 서부에 위치한 맹세의 나라.\n불빛의 인도를 따라 협곡과 계곡을 지나면 펼쳐지는 그곳은 찬란한 횃불이 타오르는 땅이자, 만인의 불꽃이 하나 되는 곳이다.\n용들이 활보하는 드넓은 평원에서 어둠에 맞서는 용사들과 함께 고대 전쟁의 끝을 지켜보도록 하자.",
             "스네즈나야":"스네즈나야 최초의 도시 키테시가 세워진 그해부터\n 폐하께서 무한한 은혜와 자비로 인간을 용서해 신민으로 받아들이고 스네즈나야성으로 천도하기까지\n요정 선조의 풍습을 본떠 지은 이 제국의 수도는 줄곧 동토를 다스리는 권력의 중심이었다."
         }
+        // 슬라이드에 넣을 각 나라의 이미지들
         const contryImgs={
             "몬드":["몬드배경1.jpg","몬드배경2.jpg","몬드배경3.jpg","몬드배경4.jpg","몬드배경5.jpg","몬드배경6.jpg","몬드배경7.jpg","몬드배경8.jpg","몬드배경9.jpg","몬드배경10.jpg"],
             "티바트":["티바트배경1.jpg","티바트배경2.jpg","티바트배경3.jpg","티바트배경4.jpg","티바트배경5.jpg","티바트배경6.jpg"],
@@ -121,6 +140,7 @@
             "나타":["나타배경1.jpg","나타배경2.jpg","나타배경3.jpg","나타배경4.jpg","나타배경5.jpg","나타배경6.jpg","나타배경7.jpg"],
             "스네즈나야":["스네즈나야배경1.jpg"]
         }
+        // 각 나라 pv url
         const contryUrl={
             "티바트":"https://youtu.be/aCNNqHEMA9A?si=0leGvVLDdKgaKIfC",
             "몬드":"https://youtu.be/BMwPlyZ31GQ?si=jN2SBc-wv7bfwlNQ",
@@ -131,20 +151,25 @@
             "나타":"https://youtu.be/pxAaYkX1ds8?si=DdmRZlVRCUxrJi5F",
             "스네즈나야":"https://youtu.be/eo2CtzUs-mU?si=RfOSVNmtLyu2yt5E"
         }
+        // 보이는 나라 정보 변경
         function changeContry(contry){
+            // 제목 및 내용 변경
             document.querySelector("#contry-content>h1").innerText=contry
             document.querySelector("#contry-content>p").innerText=contryContent[contry]
+            // 나라의 슬라이드 변경
             let imgs=[]
             for (const i in contryImgs[contry]) {
                 imgs.push(`/rsc/나라/${contry}/${contryImgs[contry][i]}`)
             }
             changeImages(imgs)
+            // 보더 삭제
             for (let element of document.querySelectorAll("button[tooltip]")) {
                 element.style.border="0px"
             }
+            // 선택된 나라 버튼 흰색 테두리 지정
             document.querySelector(`button[tooltip="${contry}"]`).style.border="white solid"
             document.querySelector("#pv-btn").addEventListener('click',()=>{
-                window.location.href=contryUrl[contry]
+                window.open(contryUrl[contry])
             })
             document.querySelector("#stc1").src=`/rsc/나라/${contry}/${contry}stc1.png`
             document.querySelector("#stc2").src=`/rsc/나라/${contry}/${contry}stc2.png`

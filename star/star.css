@@ -1,13 +1,13 @@
 
 .star{
+    /* 별 스타일 지정 */
     background:radial-gradient(white 10%, #697fbf, rgba(0,0,0,0) 60% );
-    border-radius:100%;
+    /* 둥 뜨게 지정 */
     position: absolute;
+    /* 애니메이션 지정 */
     animation: twingkle 0.5s ease-in-out infinite;
-    animation-name: twingkle;
-    animation-duration: 1s;
 }
-
+/* 별빛 반짝임 애니메이션 */
 @keyframes twingkle {
     0%{
         scale: 1;

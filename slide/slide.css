@@ -1,15 +1,21 @@
+/* 슬라이드 화면 스타일 */
 .slide-box{
     display: flex;
     position: relative;
+    /* 화면 넘어감 자동 삭제 */
     overflow: hidden;
 }
+/* 사진 스타일 */
 .slide-track>*{
     object-fit: fill;
     height: 100%;
 }
+/* 사진 나열되어있는 트랙 */
 .slide-track{
     position: absolute;
+    /* 사진 가로 나열 */
     display: flex;
+    /* 화면 움직이는데 걸리는 시간 */
     transition: all 0.5s;
     height: 100%;
 }

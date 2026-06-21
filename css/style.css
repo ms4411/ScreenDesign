@@ -1,4 +1,5 @@
 @import url(/css/font.css);
+/* 모든 요소에 공통 적용 */
 *{
     padding: 0;
     margin: 0;
@@ -8,42 +9,47 @@
     color: white;
     font-size: medium;
 }
+/* html문서 길이 100%로 지정 (안그러면 안에 요소가 아작나는 경우 많아서 초반에 미리 지정) */
 html{
     height: 100%;
 }
+/* body에 배경 지정 */
 body{
     background-attachment: fixed;
     background-size: cover;
     background-image:url(/rsc/background.jpg);
-    background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: multiply;
-    transition: background-image 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5); 
+    background-blend-mode: multiply; /* 배경 이미지와 배경 컬러 섞어주기 (곱하기 레이어) */
     overflow: hidden;
-
     height: 100%;
 }
+/* 계산하기 쉽게 border-box로 통일 */
 div{
     box-sizing: border-box;
 
 }
+/* 박스에 가운데 정렬 적용하기 위한 클래스 */
 .sort-center{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
+/* 제목에 폰트 및 크기, 정렬 자동 지정 */
 h1, h2, h3, h4, h5, h6{
     font-family: 'HeadFont';
     text-align: center;
     font-size: xx-large;
 }
+/* 점 삭제 */
 ul{
     list-style: none;
 }
+/* 커서 모양 지정 */
 button,input,a:hover{
     cursor: pointer;
 }
+/* 버튼과 입력란 공통 디자인 지정 */
 button,input{
     border-radius: 5px;
     text-align: center;
@@ -51,9 +57,11 @@ button,input{
     box-sizing: border-box;
     padding: 0 5px;
 }
+/* 입력란 폰트 삭제 (패스워드에서 적히는거 폰트가 없어서 안보임) */
 input{
     font-family: none;
 }
+/* 버튼 공통 스타일 */
 button{
     padding: 5px;
     color: #062173;
@@ -65,17 +73,21 @@ button{
     content: "※ ";
     font-family: none;
 }
+/* 밑줄 삭제 및 링크인거 확인 용도(글자색은 전부 흑백에 가까워서 구분 가능) */
 a{
     color: #0f35a6;
     text-decoration: none;
 }
+/* 이미지하고 영상의 크기는 부모의 크기 따라가기 */
 img,video{
     width: 100%;
     height: 100%;
 }
+/* 로고 이미지는 1:1로 지정 */
 .logo{
     aspect-ratio: 1/1;
 }
+/* 메뉴바 위치 및 크기 지정 */
 .menu{
     position:fixed;
     top: 0;
@@ -83,9 +95,11 @@ img,video{
     width: 100%;
     height: 50px;
 }
+/* 메뉴바 밑에 있는 요소에 마진 자동 지정 (fixed때문에 메뉴바가 둥둥 뜸) */
 .menu ~ *{
     margin-top: 60px;
 }
+/* 콘테이너 스타일 지정(자주 사용) */
 .container{
     background-color: rgba(0,0,0,0.4);
     box-sizing: border-box;
@@ -93,15 +107,7 @@ img,video{
     box-shadow: 0px 0px 30px #dce2f2;
 }
 
-/* 스타일 지정 */
-.btn-style1{
-    background-color: #0f35a6;
-    color: white;
-}
-.btn-style2{
-    background-color: #697fbf;
-    color: black;
-}
+/* 호버 스타일 필요시 지정 */
 .hover-style:hover{
     background: radial-gradient( #697fbf, rgba(0,0,0,0) 70% );
 
@@ -120,12 +126,13 @@ img,video{
 
 /* 버튼 기능 설명 태그 */
 *[tooltip]::after{
-    content: attr(tooltip);
+    content: attr(tooltip); /* tooltip로 지정된 속성 값을 불러와 내용으로 적용 */
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /*가운데 정렬*/
     top: 75%;
     
+    /*태그 스타일 지정*/
     border: #062173 solid;
     padding: 1px 5px;
     border-radius: 10000px;

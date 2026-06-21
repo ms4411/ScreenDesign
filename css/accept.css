@@ -10,6 +10,7 @@
 .container>div{
     width: 50%;
 }
+/* div끼리 구분 */
 .container>div:not(:last-child){
     margin-right: 5%;
     border-right: #dce2f2 double;
@@ -22,10 +23,12 @@
     flex-direction: column;
     background: radial-gradient(#dce2f2 , rgba(0,0,0,0) 60%);
 }
+/* 이미지 위치 조정 */
 img{
     position: relative;
     left: -5%;
 }
+/* 이미지 아래에 있는 글 위치 및 폰트 크기 조정 */
 .img-box>p{
     margin-top: 5%;
     font-size:xx-large;
@@ -36,39 +39,46 @@ img{
     flex-direction: column;
     justify-content: center;
 }
+/* 각 입력란 스타일 지정 */
 .input-box li{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    text-align: center; /* 라벨 가운데 정렬 */
     margin: 5% 0;
-    text-align: center;
     font-size: large;
 }
+/* 버튼과 입력란 서식 지정 */
 .input-box button,input{
     width: 100%;
     aspect-ratio: 10/1;
 }
+/* 상하 마진 지정 */
 .input-box button{
     margin: 1% 0;
 }
+/* 아웃라인 삭제 및 텍스트 컬러 검은색으로 지정 */
 .input-box input{
     outline: none;
     color: black;
 }
+/* 호버 스타일 지정 */
 .input-box input:focus,button:hover{
     box-shadow: 0px 0px 10px #062173, 0px 0px 10px #dce2f2;
 }
+/* 로그인과 회원가입 화면 변경 a태그 스타일 변경 */
 .link{
     margin-top: 5%;
     color: white;
     text-align: center;
 }
+/* 경고 텍스트 스타일 지정 */
 .waring-text{
     box-sizing: border-box;
+    /* 크기 지정 */
     margin-top: 5%;
     padding: 1% 0;
     font-size: 10px;
+    /* 글 위치 지정 */
     text-align: center;
+    /* 색 지정 */
     background-color: rgba(255,255,255,0.5);
     color: black;
 }

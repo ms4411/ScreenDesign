@@ -1,17 +1,11 @@
-@font-face {
-    font-family: 'HeadFont';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeolbichhaneulTTF-L.woff2') format('woff2');
-    font-weight: 300;
-    font-display: swap;
-}
-
+/* 제목 폰트 */
 @font-face {
     font-family: 'HeadFont';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimByeolbichhaneulTTF-B.woff2') format('woff2');
     font-weight: 700;
     font-display: swap;
 }
-
+/* 본문 폰트 */
 @font-face {
     font-family: 'BodyFont';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
